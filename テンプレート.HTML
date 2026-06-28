@@ -1,0 +1,330 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+<meta charset="utf-8"/>
+<title>ぷにMOD </title>
+<style>
+        html, body {
+            margin: 0;
+            padding: 0;
+            background: rgba(0, 0, 0, 0); 
+            width: 240px !important;
+            height: 400px !important;
+            overflow: hidden;
+            font-family: sans-serif;
+            -webkit-user-select: none !important;
+            user-select: none !important;
+            -webkit-touch-callout: none !important;
+        }
+
+        /* メメニューの外枠 */
+        .box {
+            background: #fff;
+            width: 240px !important;
+            height: 400px !important;
+            border-radius: 20px;
+            overflow: hidden;
+            box-sizing: border-box;
+        }
+
+        .hd {
+            height:90px;
+            line-height:90px;
+            color:#ffd400;text-shadow:-1px -1px 0 #000,1px -1px 0 #000,-1px 1px 0 #000,1px 1px 0 #000;
+            text-align:center;
+            font-size:18px;
+            font-weight:bold;
+            background:url("data:image/webp;base64,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") center top/cover no-repeat;
+            padding:0;
+        }
+
+        .ct {
+            background: #fff;
+            color: #333;
+            padding: 5px 12px;
+            height: 290px;
+            overflow-y: scroll;
+            -webkit-overflow-scrolling: touch;
+            box-sizing: border-box;
+            width: 240px !important;
+        }
+
+        .item {
+            display: block !important;
+            clear: both;
+            padding: 12px 3px;
+            border-bottom: 1px solid #f0f0f0;
+            height: 44px; 
+            box-sizing: border-box;
+        }
+
+        .item .title-text {
+            float: left;
+            font-size: 14px;
+            font-weight: bold;
+            line-height: 20px;
+            width: 120px;
+ white-space: nowrap;
+ overflow: hidden;
+ text-overflow: ellipsis;
+        }
+
+        .switch {
+            float: right;
+            position: relative;
+            display: inline-block;
+            width: 44px;
+            height: 24px;
+            cursor: pointer;
+            border: 2px solid #000000; 
+            border-radius: 12px;
+            background-color: #555555; 
+            box-sizing: border-box;
+            margin-top: 0px;
+        }
+
+        .switch-label input {
+            position: absolute;
+            opacity: 0 !important;
+            width: 0 !important;
+            height: 0 !important;
+            margin: 0 !important;
+            padding: 0 !important;
+            z-index: -1;
+        }
+
+        .slider-circle {
+            position: absolute;
+            top: 1px;
+            left: 1px;
+            width: 18px;
+            height: 18px;
+            background-color: #ffffff;
+            border: 2px solid #000000;
+            border-radius: 50%;
+            box-sizing: border-box;
+            transition: left 0.2s, background-color 0.2s;
+            -webkit-transition: left 0.2s, background-color 0.2s;
+        }
+
+        input:checked + .switch {
+            background-color: #00d2ff;
+        }
+
+        input:checked + .switch .slider-circle {
+            left: 21px;
+        }
+
+        .ft {
+            height: 50px;
+            background: #ffffff;
+            border-top: 1px solid rgba(255,255,255,0.2);
+            box-sizing: border-box;
+            padding-top: 5px;
+            display:flex;justify-content:space-around;align-items:center;
+        }
+
+        .ft-btn {
+            color:#3da5ff !important;
+            font-weight:bold!important;
+            font-size:15px!important;
+            text-decoration:none!important;
+            background:none!important;
+            border:none!important;
+            text-shadow:0 0 2px #000;
+            cursor: pointer;
+        }
+        .ft-btn:hover{opacity:.85;}
+        .ft-btn:active { opacity: 0.6; }
+</style>
+<style>
+input[type="checkbox"], .switch, .toggle, .slider{
+    accent-color:#00c853 !important;
+}
+.slider,.toggle,.switch{
+    transition:background-color .2s ease,color .2s ease,border-color .2s ease !important;
+}
+.on,.enabled,.active{
+    background:#00c853 !important;
+    border-color:#00c853 !important;
+}
+</style>
+</head>
+<body>
+<div class="box">
+<div class="hd">ぷにMOD メメニュー</div>
+<div class="ct">
+<div class="item"><span class="title-text">ワンパン</span><label class="switch-label"><input id="one" onchange="toggleHack('one')" type="checkbox"/><span class="switch"><span class="slider-circle"></span></span></label></div>
+<div class="item"><span class="title-text">倍速</span><label class="switch-label"><input id="spd" onchange="toggleHack('spd')" type="checkbox"/><span class="switch"><span class="slider-circle"></span></span></label></div>
+<div class="item"><span class="title-text">遅延</span><label class="switch-label"><input id="dly" onchange="toggleHack('dly')" type="checkbox"/><span class="switch"><span class="slider-circle"></span></span></label></div>
+<div class="item"><span class="title-text">無敵</span><label class="switch-label"><input id="mtk" onchange="toggleHack('mtk')" type="checkbox"/><span class="switch"><span class="slider-circle"></span></span></label></div>
+<div class="item"><span class="title-text">スコア</span><label class="switch-label"><input id="scr" onchange="toggleHack('scr')" type="checkbox"/><span class="switch"><span class="slider-circle"></span></span></label></div>
+<div class="item"><span class="title-text">ダメージ100万</span><label class="switch-label"><input id="dmg" onchange="toggleHack('dmg')" type="checkbox"/><span class="switch"><span class="slider-circle"></span></span></label></div>
+<div class="item"><span class="title-text">リザルトスキップ</span><label class="switch-label"><input id="skp" onchange="toggleHack('skp')" type="checkbox"/><span class="switch"><span class="slider-circle"></span></span></label></div>
+<div class="item"><span class="title-text">妖怪泥無効</span><label class="switch-label"><input id="ndr" onchange="toggleHack('ndr')" type="checkbox"/><span class="switch"><span class="slider-circle"></span></span></label></div>
+<div class="item"><span class="title-text">即技</span><label class="switch-label"><input id="wz" onchange="toggleHack('wz')" type="checkbox"/><span class="switch"><span class="slider-circle"></span></span></label></div>
+<div class="item"><span class="title-text">ぷにサイズ</span><label class="switch-label"><input id="sz" onchange="toggleHack('sz')" type="checkbox"/><span class="switch"><span class="slider-circle"></span></span></label></div>
+<div class="item"><span class="title-text">ぷに1色</span><label class="switch-label"><input id="clr" onchange="toggleHack('clr')" type="checkbox"/><span class="switch"><span class="slider-circle"></span></span></label></div>
+<div class="item"><span class="title-text">敵ターン無効</span><label class="switch-label"><input id="trn" onchange="toggleHack('trn')" type="checkbox"/><span class="switch"><span class="slider-circle"></span></span></label></div>
+<div class="item"><span class="title-text">即フィーバー</span><label class="switch-label"><input id="fvr" onchange="toggleHack('fvr')" type="checkbox"/><span class="switch"><span class="slider-circle"></span></span></label></div>
+<div class="item"><span class="title-text">鍵泥演出無効</span><label class="switch-label"><input id="key" onchange="toggleHack('key')" type="checkbox"/><span class="switch"><span class="slider-circle"></span></span></label></div>
+<div class="item"><span class="title-text">即勝利</span><label class="switch-label"><input id="win" onchange="toggleHack('win')" type="checkbox"/><span class="switch"><span class="slider-circle"></span></span></label></div>
+<div class="item"><span class="title-text">メニュー状態を保存</span><label class="switch-label"><input id="save" onchange="toggleSaveSetting()" type="checkbox"/><span class="switch"><span class="slider-circle"></span></span></label></div>
+<div style="text-align:center;background:#0b63d1;padding:8px;"><a href="https://discord.gg/tC92h7ydA8" style="color:#fff;text-decoration:none;font-weight:bold;" target="_blank">my Discord Server</a></div>
+<div style="display:flex;justify-content:space-between;padding:8px 12px;background:#0b63d1;"><a href="javascript:void(0)" onclick="clickLogout()" style="color:white;text-decoration:none;font-weight:bold;">ログアウト</a><a href="javascript:void(0)" onclick="clickAppEnd()" style="color:white;text-decoration:none;font-weight:bold;">アプリ終了</a></div>
+</div>
+</div>
+<script>
+    document.oncontextmenu = function () {
+        return false;
+    };
+
+    // --- 各機能のオフセット・バイトコード設定用オブジェクト ---
+    // ここにご自身の環境に応じた「オフセット」や「バイトコード」を入力してください。
+    // 例: "one" (ワンパン) の行を書き換えるだけで適用されます。
+    const hackConfig = {
+        "one": { fpath: "自分専用IPA名", addr: 0x100000, bytes: "バイトコード" }, // ワンパン
+        "spd": { fpath: "自分専用IPA名", addr: 0x0,      bytes: "" }, // 倍速
+        "dly": { fpath: "自分専用IPA名", addr: 0x0,      bytes: "" }, // 遅延
+        "mtk": { fpath: "自分専用IPA名", addr: 0x0,      bytes: "" }, // 無敵
+        "scr": { fpath: "自分専用IPA名", addr: 0x0,      bytes: "" }, // スコア
+        "dmg": { fpath: "自分専用IPA名", addr: 0x0,      bytes: "" }, // ダメージ100万
+        "skp": { fpath: "自分専用IPA名", addr: 0x0,      bytes: "" }, // リザルトスキップ
+        "ndr": { fpath: "自分専用IPA名", addr: 0x0,      bytes: "" }, // 妖怪泥無効
+        "wz":  { fpath: "自分専用IPA名", addr: 0x0,      bytes: "" }, // 即技
+        "sz":  { fpath: "自分専用IPA名", addr: 0x0,      bytes: "" }, // ぷにサイズ
+        "clr": { fpath: "自分専用IPA名", addr: 0x0,      bytes: "" }, // ぷに1色
+        "trn": { fpath: "自分専用IPA名", addr: 0x0,      bytes: "" }, // 敵ターン無効
+        "fvr": { fpath: "自分専用IPA名", addr: 0x0,      bytes: "" }, // 即フィーバー
+        "key": { fpath: "自分専用IPA名", addr: 0x0,      bytes: "" }, // 鍵泥演出無効
+        "win": { fpath: "自分専用IPA名", addr: 0x0,      bytes: "" }  // 即勝利
+    };
+
+    const list = Object.keys(hackConfig);
+
+    // 共通のハック切り替え処理
+    function toggleHack(id) {
+        var checkbox = document.getElementById(id);
+        if (!checkbox) return;
+
+        // h5frida が存在しない場合の処理
+        if (typeof h5frida === 'undefined') {
+            alert("専用ipaじゃありません。");
+            checkbox.checked = !checkbox.checked; // チェックを元に戻す
+            return;
+        }
+
+        var config = hackConfig[id];
+        if (!config || !config.fpath || config.addr === 0x0) {
+            console.log(id + " の設定またはオフセットが未設定です。");
+            return;
+        }
+
+        // コードパッチの有効・無効化
+        if (checkbox.checked) {
+            ActiveCodePatch(config.fpath, config.addr, config.bytes);
+        } else {
+            DeactiveCodePatch(config.fpath, config.addr, config.bytes);
+        }
+
+        // 「メニュー状態を保存」スイッチがオンの時のみ状態を保存する
+        var isSaveEnabled = localStorage.getItem("save_setting_enabled") === "true";
+        if (isSaveEnabled) {
+            localStorage.setItem(id, checkbox.checked ? "true" : "false");
+        }
+    }
+
+    // 「メニュー状態を保存」スイッチのオンオフ切り替え処理
+    function toggleSaveSetting() {
+        var saveCheckbox = document.getElementById("save");
+        if (!saveCheckbox) return;
+
+        // 保存スイッチ自体の状態を記録
+        localStorage.setItem("save_setting_enabled", saveCheckbox.checked ? "true" : "false");
+
+        if (saveCheckbox.checked) {
+            // 保存がオンになった瞬間、現在のすべてのスイッチの状態を記録
+            list.forEach(function(id) {
+                var cb = document.getElementById(id);
+                if (cb) {
+                    localStorage.setItem(id, cb.checked ? "true" : "false");
+                }
+            });
+        } else {
+            // 保存がオフになった瞬間、過去に保存されたデータをすべて削除（初期化）
+            list.forEach(function(id) {
+                localStorage.removeItem(id);
+            });
+        }
+    }
+
+    function clickLogout() {
+        try {
+            if (typeof h5gg !== 'undefined' && h5gg.loadPlugin) {
+                const kt74v = h5gg.loadPlugin("YWPLOGOUT", "logout.dylib");
+                kt74v.logout();
+
+                setTimeout(function() {
+                    try {
+                        const end = h5gg.loadPlugin("AppEND", "AppEND.dylib");
+                        end.append();
+                    } catch (e) {}
+                }, 300);
+            }
+        } catch (e) {}
+    }
+
+    function clickAppEnd() {
+        try {
+            if (typeof h5gg !== 'undefined' && h5gg.loadPlugin) {
+                const end = h5gg.loadPlugin("AppEND", "AppEND.dylib");
+                end.append();
+            }
+        } catch (e) {}
+    }
+
+    window.onload = function() {
+        // 「メニュー状態を保存」スイッチの状態を復元
+        var isSaveEnabled = localStorage.getItem("save_setting_enabled") === "true";
+        var saveCheckbox = document.getElementById("save");
+        if (saveCheckbox) {
+            saveCheckbox.checked = isSaveEnabled;
+        }
+
+        // 保存スイッチがONの場合のみ、過去のON/OFF状態を復元して自動パッチ
+        if (isSaveEnabled) {
+            list.forEach(function(id) {
+                var saved = localStorage.getItem(id);
+                if (saved === "true") {
+                    var checkbox = document.getElementById(id);
+                    if (checkbox) {
+                        checkbox.checked = true;
+                        
+                        // ロード直後の自動パッチ適用（h5fridaの読み込み待ちを考慮して500ms遅延）
+                        setTimeout(function() {
+                            if (typeof h5frida !== 'undefined') {
+                                var config = hackConfig[id];
+                                if (config && config.fpath && config.addr !== 0x0) {
+                                    ActiveCodePatch(config.fpath, config.addr, config.bytes);
+                                }
+                            }
+                        }, 500);
+                    }
+                }
+            });
+        }
+
+        setWindowRect(10, 80, 240, 400);
+        setWindowDrag(0, 0, 240, 50);
+
+        setTimeout(function() {
+            if (typeof setWindowTouchMode === 'function') {
+                setWindowTouchMode(1);
+            } else if (typeof h5gg !== 'undefined' && h5gg.setWindowTouch) {
+                h5gg.setWindowTouch(false);
+            }
+        }, 100);
+    };
+</script>
+</body>
+</html>
